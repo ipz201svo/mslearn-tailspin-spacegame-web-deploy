@@ -67,12 +67,13 @@ stages:
             artifact: drop
 
   - stage: "Dev"
-    displayName: "Deploy the web application"
+    displayName: "Deploy to the dev environment"
     dependsOn: Build
     condition: |
-      and(
+      and
+      (
         succeeded(),
-        eq(variables['Build.SourceBranch'], variables['releaseBranchName'])
+        eq(variables['Build.SourceBranchName'], variables['releaseBranchName'])
       )
     jobs:
       - deployment: Deploy
